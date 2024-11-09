@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
-const Classes = sequelize.define('User', {
+const Classes = sequelize.define('Classes', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -10,7 +10,7 @@ const Classes = sequelize.define('User', {
   id_user: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    unique: true,
+    unique: false,
   },
   nome: {
     type: DataTypes.STRING,
@@ -25,15 +25,15 @@ const Classes = sequelize.define('User', {
     allowNull: true,
   },
   talentos: {
-    type: DataTypes.STRING,
+    type: DataTypes.ARRAY(DataTypes.INTEGER),
     allowNull: true,
   },
   passivas: {
-    type: DataTypes.STRING,
+    type: DataTypes.ARRAY(DataTypes.INTEGER),
     allowNull: true,
   },
   items: {
-    type: DataTypes.STRING,
+    type: DataTypes.ARRAY(DataTypes.INTEGER),
     allowNull: true,
   },
   xp: {

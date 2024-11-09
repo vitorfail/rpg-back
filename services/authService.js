@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET, JWT_EXPIRATION } = process.env;
 
 const hashPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
@@ -13,8 +12,8 @@ const comparePassword = async (password, hashedPassword) => {
 };
 
 const generateToken = (user) => {
-  return jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, {
-    expiresIn: JWT_EXPIRATION,
+  return jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRATION,
   });
 };
 

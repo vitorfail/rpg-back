@@ -14,7 +14,16 @@ app.use(bodyParser.json());
 // Definindo rotas
 app.use('/api/auth', authRoutes);
 
-// Iniciar o servidor
+async function inicio(){
+  const users = require('./models/user.js');
+  const pontos = require('./models/pontos.js');
+  const magic = require('./models/magic.js');
+  const classes = require('./models/classes.js');
+  const aparencia = require('./models/aparencia.js');
+  await sequelize.sync();
+  console.log("conectado ao banco de dados")   
+}
+inicio()
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, async () => {
   try {

@@ -15,7 +15,7 @@ const register = async (req, res) => {
     const hashedPassword = await hashPassword(password);
 
     // Cria o usuário no banco de dados
-    const newUser = await User.create({ username, password: hashedPassword });
+    const newUser = await User.create({ username:username, password: hashedPassword });
 
     // Gera um token JWT
     const token = generateToken(newUser);

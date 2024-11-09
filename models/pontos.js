@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
-const Pontos = sequelize.define('User', {
+const Pontos = sequelize.define('Pontos', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -10,7 +10,7 @@ const Pontos = sequelize.define('User', {
   id_user: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    unique: true,
+    unique: false,
   },
   vida: {
     type: DataTypes.INTEGER,

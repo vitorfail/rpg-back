@@ -10,7 +10,7 @@ const Aparencia = sequelize.define('Aparencia', {
   id_user: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    unique: true,
+    unique: false,
   },
   sexo: {
     type: DataTypes.STRING,
