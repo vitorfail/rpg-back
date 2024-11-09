@@ -16,5 +16,5 @@ const generateToken = (user) => {
     expiresIn: process.env.JWT_EXPIRATION,
   });
 };
-
+//naruto
 module.exports = { hashPassword, comparePassword, generateToken };
