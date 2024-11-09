@@ -3,24 +3,24 @@ const User = require('../models/user');
 
 const register = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { username, password } = req.body;
 
     // Verifica se o usuário já existe
-    const userExists = await User.findOne({ where: { email } });
+    const userExists = await User.findOne({ where: { username } });
     if (userExists) {
-      return res.status(400).json({ message: 'Email já registrado.' });
+      return res.status(400).json({ message: 'NAME EXIST' });
     }
 
     // Criptografa a senha
     const hashedPassword = await hashPassword(password);
 
     // Cria o usuário no banco de dados
-    const newUser = await User.create({ name, email, password: hashedPassword });
+    const newUser = await User.create({ username, password: hashedPassword });
 
     // Gera um token JWT
     const token = generateToken(newUser);
 
-    return res.status(201).json({ token, user: { id: newUser.id, name: newUser.name, email: newUser.email } });
+    return res.status(201).json({ token, user: { id: newUser.id, username: newUser.username} });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Erro no servidor.' });
@@ -29,10 +29,10 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
     // Verifica se o usuário existe
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({ where: { username } });
     if (!user) {
       return res.status(400).json({ message: 'Email ou senha inválidos.' });
     }
@@ -46,10 +46,10 @@ const login = async (req, res) => {
     // Gera um token JWT
     const token = generateToken(user);
 
-    return res.status(200).json({ token, user: { id: user.id, name: user.name, email: user.email } });
+    return res.status(200).json({ token, user: { id: user.id, username: user.username } });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'Erro no servidor.' });
+    return res.status(500).json({ message: 'NAME EXIST' });
   }
 };
 
