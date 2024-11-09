@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 // Definindo rotas
 app.use('/api/auth', authRoutes);
-
+app.get('/', async (req, res) => {res.status(200).json({"message":"Não usamos essa entrada paizão"})});
 async function inicio(){
   const users = require('./models/user.js');
   const pontos = require('./models/pontos.js');
