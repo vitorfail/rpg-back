@@ -10,7 +10,17 @@ const app = express();
 
 // Middleware para analisar o corpo da requisição
 app.use(bodyParser.json());
+var cors = require('cors')
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors())
+app.use(express.json({limit: '534kb', extended: false }));
+app.use(express.urlencoded({limit: '534kb', extended: true }));
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 // Definindo rotas
 app.use('/api/auth', authRoutes);
 app.get('/', async (req, res) => {res.status(200).json({"message":"Não usamos essa entrada paizão"})});
