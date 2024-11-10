@@ -34,13 +34,13 @@ const login = async (req, res) => {
     // Verifica se o usuário existe
     const user = await User.findOne({ where: { username } });
     if (!user) {
-      return res.status(400).json({ message: 'Email ou senha inválidos.' });
+      return res.status(200).json({ message: 'Email ou senha inválidos.' });
     }
 
     // Compara a senha
     const isMatch = await comparePassword(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ message: 'Email ou senha inválidos.' });
+      return res.status(200).json({ message: 'Email ou senha inválidos.' });
     }
 
     // Gera um token JWT
