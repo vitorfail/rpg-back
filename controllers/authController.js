@@ -8,7 +8,7 @@ const register = async (req, res) => {
     // Verifica se o usuário já existe
     const userExists = await User.findOne({ where: { username } });
     if (userExists) {
-      return res.status(400).json({ message: 'NAME EXIST' });
+      return res.status(200).json({ message: 'NAME EXIST' });
     }
 
     // Criptografa a senha
@@ -20,7 +20,7 @@ const register = async (req, res) => {
     // Gera um token JWT
     const token = generateToken(newUser);
 
-    return res.status(201).json({ token, user: { id: newUser.id, username: newUser.username} });
+    return res.status(200).json({ token, user: { id: newUser.id, username: newUser.username} });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Erro no servidor.' });
