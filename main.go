@@ -2,14 +2,16 @@ package main
 
 import (
 	"log"
+	"net/http"
 	"rpg-back/config"
-	"rpg-back/models" // Certifique-se de importar o pacote que contém seus modelos
+	"rpg-back/models"
 	"rpg-back/routes"
 
 	"github.com/gin-gonic/gin"
+	"github.com/vercel/go-bridge/go/bridge"
 )
 
-func main() {
+func Handler(w http.ResponseWriter, r *http.Request) {
 	// Conectar ao banco de dados
 	config.ConnectDatabase()
 
@@ -18,16 +20,12 @@ func main() {
 		log.Fatal("Erro ao migrar as tabelas:", err)
 	}
 
-	// Iniciar o servidor
-	r := gin.Default()
+	// Criar o roteador Gin
+	router := gin.Default()
 
 	// Registrar as rotas
-	routes.UserRoutes(r)
+	routes.UserRoutes(router)
 
-	log.Println("Servidor rodando em http://localhost:8080")
-
-	// Iniciar o servidor na porta 8080
-	if err := r.Run(":8080"); err != nil {
-		log.Fatal("Erro ao iniciar o servidor:", err)
-	}
+	// Adaptar o roteador Gin para funcionar com Vercel
+	bridge.New(router).ServeHTTP(w, r)
 }
