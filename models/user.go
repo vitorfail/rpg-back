@@ -1,12 +1,12 @@
 package models
-import (
+import(
 	"time"
 )
-
+// User representa o modelo de usuário no sistema
 type User struct {
-	ID       uint   `gorm:"primaryKey;autoIncrement"`
-	Username string `gorm:"unique;not null"`
-	Password string `gorm:"not null"`
-	CreatedAt time.Time `gorm:"autoCreateTime;not null"` // Campo auto gerado
-	UpdatedAt time.Time `gorm:"autoUpdateTime;not null"`
+	ID    int    `json:"id"`
+	Username  string `json:"username"`
+	Password string `json:"password"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
